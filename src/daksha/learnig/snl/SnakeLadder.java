@@ -10,7 +10,14 @@ public class SnakeLadder {
 	
 	public void startGame(int headPosition, int tailPosition) {
 		pugPosition = 1;
-		
+		if(headPosition>tailPosition && headPosition<100 && tailPosition<100 && 
+				headPosition>1 && tailPosition>1) {
+			snakeHead = headPosition;
+			snakeTail = tailPosition;
+			System.out.println("Snake is set at (" + snakeHead+ "," +snakeTail+ ")!");
+		}else {
+			System.out.println("Snake not set!");
+		}
 	}
 	
 	public int updateStatus()
