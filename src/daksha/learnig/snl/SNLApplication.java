@@ -25,27 +25,29 @@ public class SNLApplication {
 		input[3] = scanner.nextLine();
 		SnakeLadder snakeLadder = new SnakeLadder();
 		try {
-			int numberOfTurns = Integer.parseInt(input[2]);
-			snakeLadder.startGame(Integer.parseInt(input[0]), Integer.parseInt(input[1]));
-			switch(input[3].toUpperCase()) {
-			case "C":
-				while (numberOfTurns > 0) {
-					int pugPos=snakeLadder.updateCrookedStatus();
-					if(pugPos==100){
-						System.out.println("Victory!");
-						return;
+			if(snakeLadder.validateInputs(input)) {
+				int numberOfTurns = Integer.parseInt(input[2]);
+				snakeLadder.startGame(Integer.parseInt(input[0]), Integer.parseInt(input[1]));
+				switch(input[3].toUpperCase()) {
+				case "C":
+					while (numberOfTurns > 0) {
+						int pugPos=snakeLadder.updateCrookedStatus();
+						if(pugPos==100){
+							System.out.println("Victory!");
+							return;
+						}
+						--numberOfTurns;
 					}
-					--numberOfTurns;
-				}
-				break;
-			default:
-				while (numberOfTurns > 0) {
-					int pugPos=snakeLadder.updateStatus();
-					if(pugPos==100){
-						System.out.println("Victory!");
-						return;
+					break;
+				default:
+					while (numberOfTurns > 0) {
+						int pugPos=snakeLadder.updateStatus();
+						if(pugPos==100){
+							System.out.println("Victory!");
+							return;
+						}
+						--numberOfTurns;
 					}
-					--numberOfTurns;
 				}
 			}
 		} catch(Exception ex) {

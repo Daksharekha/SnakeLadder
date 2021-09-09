@@ -13,14 +13,9 @@ public class SnakeLadder {
 	
 	public void startGame(int headPosition, int tailPosition) {
 		pugPosition = 1;
-		if(headPosition>tailPosition && headPosition<100 && tailPosition<100 && 
-				headPosition>1 && tailPosition>1) {
-			snakeHead = headPosition;
-			snakeTail = tailPosition;
-			System.out.println("Snake is set at (" + snakeHead+ "," +snakeTail+ ")!");
-		}else {
-			System.out.println("Snake not set!");
-		}
+		snakeHead = headPosition;
+		snakeTail = tailPosition;
+		System.out.println("Snake is set at (" + snakeHead+ "," +snakeTail+ ")!");
 	}
 	
 	public int updateStatus()
@@ -75,5 +70,39 @@ public class SnakeLadder {
         return list.get(index);
         
     }
+
+	public boolean validateInputs(String[] input) {
+		// TODO Auto-generated method stub
+		int headPosition=0, tailPosition=0;
+		boolean valid=true;
+		try {
+			headPosition = Integer.parseInt(input[0]);
+		} catch(Exception ex) {
+			System.out.println("Not a valid head position");
+			valid=false;
+		}
+		try {
+			tailPosition = Integer.parseInt(input[1]);
+		} catch(Exception ex) {
+			System.out.println("Not a valid tail position");
+			valid=false;
+		}
+		if(headPosition<tailPosition || headPosition>=100 || tailPosition>=100 ||
+				headPosition<=1 || tailPosition<=1) {
+			System.out.println("Not a valid Snake position");
+			valid=false;
+		}
+		try {
+			Integer.parseInt(input[2]);
+		} catch(Exception ex) {
+			System.out.println("Invalid number of turns");
+			valid=false;
+		}
+		if(input[3].length()!=1){
+			System.out.println("Invalid dice selection");
+			valid=false;
+		}
+		return valid;
+	}
 
 }
