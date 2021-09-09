@@ -1,6 +1,9 @@
 package daksha.learnig.snl;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class SnakeLadder {
 	static int BOARDSIZE = 100;
@@ -43,5 +46,34 @@ public class SnakeLadder {
 			num=1;
 		return num;
 	}
+	
+	public int updateCrookedStatus()
+	{
+		int diceValue = rollCrookedDice();
+		++numberOfMoves;
+		System.out.print(numberOfMoves + ". Dice : " + diceValue);
+		if(diceValue+pugPosition <= 100)
+			pugPosition = pugPosition+diceValue;
+		System.out.println(" Pug : " + pugPosition);
+		if(pugPosition==snakeHead) {
+			pugPosition=snakeTail;
+			System.out.println("OOPS Snake Bite! Pug : " + pugPosition);
+		}
+		return pugPosition;
+	}
+	
+	public int rollCrookedDice() {
+		List<Integer> list = new ArrayList<Integer>();
+        list.add(2);
+        list.add(4);
+        list.add(6);
+		return getRandomList(list);
+	}
+	
+	public int getRandomList(List<Integer> list) {
+        int index = ThreadLocalRandom.current().nextInt(list.size());		
+        return list.get(index);
+        
+    }
 
 }
